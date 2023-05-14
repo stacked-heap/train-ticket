@@ -27,14 +27,18 @@ push-image:
 publish-image:
 	@script/publish-docker-images.sh $(Repo) $(Tag)
 
+# deploy from source
+.PHONY: deploy
+deploy: build deploy-no-build
+
 # deploy
 # DeployArgs ""                    : deploy train-ticket with all-in-one mysql cluster
 # DeployArgs "--independent-db"    : deploy train-ticket with mysql cluster each service
 # DeployArgs "--with-monitoring"   : deploy train-ticket with prometheus
 # DeployArgs "--with-tracing"      : deploy train-ticket with skywalking
 # DeployArgs "--all"               : deploy train-ticket with mysql cluster each service
-.PHONY: deploy
-deploy:
+.PHONY: deploy-no-build
+deploy-no-build:
 	@hack/deploy/deploy.sh $(Namespace) "$(DeployArgs)"
 
 # deploy
