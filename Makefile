@@ -8,11 +8,7 @@ DeployArgs=""
 
 # build image
 .PHONY: build
-build: clean-image package build-image
-
-.PHONY: package
-package:
-	@mvn clean package -Dmaven.test.skip=true
+build: clean-image build-image
 
 .PHONY: build-image
 build-image:

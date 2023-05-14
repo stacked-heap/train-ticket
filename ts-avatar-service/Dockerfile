@@ -9,7 +9,7 @@ RUN apt install -y libgl1-mesa-glx
 ENV PYTHONUNBUFFERED=TRUE
 
 RUN mkdir -p /app
-ADD . /app/
+ADD ts-avatar-service /app/
 WORKDIR /app
 
 RUN pip install -r requirements.txt
