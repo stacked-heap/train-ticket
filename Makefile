@@ -1,7 +1,7 @@
 # Codewisdom Train-Ticket system
 
 Repo=codewisdom
-Tag=latest
+Tag=1.0.1
 Namespace="default"
 DeployArgs=""
 
