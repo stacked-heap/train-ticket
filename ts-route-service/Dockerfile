@@ -1,16 +1,17 @@
 From maven:3.9.1-eclipse-temurin-8 as build
-ARG SERVICE_NAME=ts-route-service
 
 WORKDIR /app
 
 COPY pom.xml pom.xml
 COPY ts-common/pom.xml ts-common/pom.xml
-COPY $SERVICE_NAME/pom.xml $SERVICE_NAME/pom.xml
-
-# Remove all modules except ts-common and $SERVICE_NAME
-RUN sed -i "/<module>\(ts-common\|$SERVICE_NAME\)<\/module>/!{/<module>.*<\/module>/d}" pom.xml
-
+# Remove all modules except ts-common
+RUN sed -i "/<module>\(ts-common\)<\/module>/!{/<module>.*<\/module>/d}" pom.xml
 RUN mvn dependency:go-offline -B
+
+ARG SERVICE_NAME=ts-route-service
+# Add $SERVICE_NAME module
+RUN sed -i "/<module>ts-common<\/module>/a <module>$SERVICE_NAME</module>" pom.xml
+COPY $SERVICE_NAME/pom.xml $SERVICE_NAME/pom.xml
 
 COPY ts-common/src ./ts-common/src
 COPY $SERVICE_NAME/src ./$SERVICE_NAME/src
