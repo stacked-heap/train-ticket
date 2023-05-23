@@ -36,3 +36,4 @@ venv.bak/
 
 deployment/kubernetes-manifests/quickstart-k8s/yamls/deploy.yaml
 deployment/kubernetes-manifests/quickstart-k8s/yamls/secret.yaml
+deployment/kubernetes-manifests/quickstart-k8s/yamls/sw_deploy.yaml
