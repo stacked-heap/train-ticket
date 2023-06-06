@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.9.6
 
 RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
@@ -9,7 +9,7 @@ RUN apt install -y libgl1-mesa-glx
 ENV PYTHONUNBUFFERED=TRUE
 
 RUN mkdir -p /app
-ADD . /app/
+ADD ts-avatar-service /app/
 WORKDIR /app
 
 RUN pip install -r requirements.txt
