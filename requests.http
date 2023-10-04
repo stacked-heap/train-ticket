@@ -1,0 +1,22 @@
+POST http://localhost:30800/graphql
+Content-Type: application/json
+
+{
+  "query": "{ queryTraces(duration: {start: \"2021-01-01T00:00\", end: \"2021-01-02T00:00\", step: DAY}, traceState: ALL, paging: {pageNum: 1, pageSize: 20, needTotal: true}) { traces { segmentId, endpointNames, duration, start, isError, traceIds } } }"
+}
+
+#################
+
+GET http://localhost:30467/api/v1/adminorderservice/welcome
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWQiOiJiMjExNjRiMy1mNGNkLTRkMmUtYTdiNy0zZGYzZjZhYjQ0NmMiLCJpYXQiOjE2OTM4NDY2MDgsImV4cCI6MTY5Mzg1MDIwOH0.AK5HL8XPiOUbly9_yLOFPsrGMTLhdJNB5OK4enwUd60
+
+
+#################
+
+POST http://localhost:30467/api/v1/users/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "222222"
+}

@@ -1,4 +1,4 @@
-From maven:3.9.1-eclipse-temurin-8 as build
+From maven:3.9.4-eclipse-temurin-17 as build
 
 WORKDIR /app
 
@@ -18,13 +18,13 @@ COPY $SERVICE_NAME/src ./$SERVICE_NAME/src
 
 RUN mvn package -DskipTests
 
-FROM eclipse-temurin:8-jre
-ARG SERVICE_NAME=ts-food-service
+# FROM eclipse-temurin:17-jre
+# ARG SERVICE_NAME=ts-food-service
 ENV SERVICE_NAME=$SERVICE_NAME
 
-RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
+# RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
-COPY --from=build /app/$SERVICE_NAME/target/$SERVICE_NAME-1.0.jar /app/
-CMD java -Xmx200m -jar /app/$SERVICE_NAME-1.0.jar
+# COPY --from=build /app/$SERVICE_NAME/target/$SERVICE_NAME-1.0.jar /app/
+CMD java -Xmx200m -jar /app/$SERVICE_NAME/target/$SERVICE_NAME-1.0.jar
 
 EXPOSE 18856

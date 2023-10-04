@@ -66,12 +66,13 @@ metadata:
   labels:
     app: skywalking
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - name: http
       port: 12800
       protocol: TCP
       targetPort: 12800
+      nodePort: 30800
     - name: grpc
       port: 11800
       protocol: TCP

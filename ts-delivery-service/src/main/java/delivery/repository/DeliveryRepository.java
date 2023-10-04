@@ -23,6 +23,6 @@ public interface DeliveryRepository extends CrudRepository<Delivery, String> {
 
     void deleteById(String id);
 
-    void deleteFoodOrderByOrderId(String id);
+    void deleteFoodOrderByOrderId(UUID id);
 
 }

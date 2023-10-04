@@ -2,7 +2,7 @@
 
 package org.myproject.ms.monitoring.instrument.web.client;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

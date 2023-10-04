@@ -33,7 +33,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL57Dialect
 
   rabbitmq:
     host: ${rabbitmq_host:localhost}
@@ -42,3 +42,5 @@ spring:
 
 swagger:
   controllerPackage: notification.controller
+
+test_send_mail_user: 'test-user'

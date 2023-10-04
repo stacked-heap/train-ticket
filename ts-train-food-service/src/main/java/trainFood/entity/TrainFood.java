@@ -5,11 +5,9 @@ import edu.fudan.common.entity.Food;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @Entity

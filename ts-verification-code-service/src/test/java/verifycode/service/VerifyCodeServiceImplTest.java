@@ -7,8 +7,8 @@ import org.junit.runners.JUnit4;
 import org.springframework.http.HttpHeaders;
 import verifycode.service.impl.VerifyCodeServiceImpl;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import java.io.*;
 import java.security.Principal;
 import java.util.Collection;
@@ -22,7 +22,7 @@ public class VerifyCodeServiceImplTest {
     private VerifyCodeServiceImpl verifyCodeServiceImpl = new VerifyCodeServiceImpl();
     private HttpHeaders headers = new HttpHeaders();
 
-    private HttpServletRequest request = new HttpServletRequest() {
+    private HttpServletRequest request = new HttpServletRequest(){
         @Override
         public String getAuthType() {
             return null;
@@ -145,11 +145,6 @@ public class VerifyCodeServiceImplTest {
 
         @Override
         public boolean isRequestedSessionIdFromURL() {
-            return false;
-        }
-
-        @Override
-        public boolean isRequestedSessionIdFromUrl() {
             return false;
         }
 
@@ -309,11 +304,6 @@ public class VerifyCodeServiceImplTest {
         }
 
         @Override
-        public String getRealPath(String s) {
-            return null;
-        }
-
-        @Override
         public int getRemotePort() {
             return 0;
         }
@@ -367,6 +357,21 @@ public class VerifyCodeServiceImplTest {
         public DispatcherType getDispatcherType() {
             return null;
         }
+
+        @Override
+        public String getRequestId() {
+            return null;
+        }
+
+        @Override
+        public String getProtocolRequestId() {
+            return null;
+        }
+
+        @Override
+        public ServletConnection getServletConnection() {
+            return null;
+        }
     };
     private HttpServletResponse response = new HttpServletResponse() {
         @Override
@@ -386,16 +391,6 @@ public class VerifyCodeServiceImplTest {
 
         @Override
         public String encodeRedirectURL(String s) {
-            return null;
-        }
-
-        @Override
-        public String encodeUrl(String s) {
-            return null;
-        }
-
-        @Override
-        public String encodeRedirectUrl(String s) {
             return null;
         }
 
@@ -446,11 +441,6 @@ public class VerifyCodeServiceImplTest {
 
         @Override
         public void setStatus(int i) {
-
-        }
-
-        @Override
-        public void setStatus(int i, String s) {
 
         }
 

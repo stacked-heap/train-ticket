@@ -1,4 +1,4 @@
-From maven:3.9.1-eclipse-temurin-8 as build
+From maven:3.9.4-eclipse-temurin-17 as build
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY $SERVICE_NAME/src ./$SERVICE_NAME/src
 
 RUN mvn package -DskipTests
 
-FROM eclipse-temurin:8-jre
+FROM eclipse-temurin:17-jre
 ARG SERVICE_NAME=ts-food-delivery-service
 ENV SERVICE_NAME=$SERVICE_NAME
 

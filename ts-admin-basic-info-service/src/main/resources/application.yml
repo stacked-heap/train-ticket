@@ -11,3 +11,7 @@ spring:
 
 swagger:
   controllerPackage: adminbasic.microservice
+debug: true
+logging:
+  level:
+    org.springframework.web: ERROR
