@@ -39,6 +39,13 @@ spec:
       labels:
         run: elasticsearch
     spec:
+      nodeSelector:
+        elasticsearch-node: "true"
+      tolerations:
+      - key: "elasticsearch"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
       containers:
       - env:
         - name: discovery.type
@@ -54,9 +61,9 @@ spec:
           protocol: TCP
         resources:
           limits:
-            cpu: 500m
-            memory: 2Gi
+            cpu: 2000m
+            memory: 12Gi
           requests:
-            cpu: 500m
-            memory: 2Gi
+            cpu: 1000m
+            memory: 8Gi
 status: {}

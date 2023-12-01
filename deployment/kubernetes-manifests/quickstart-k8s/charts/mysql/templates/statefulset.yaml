@@ -40,6 +40,11 @@ spec:
       {{- end }}
       serviceAccountName: {{ template "serviceAccountName" . }}
       initContainers:
+      - name: disable-ipv6
+        image: busybox
+        command: [ "sysctl", "-w", "net.ipv6.conf.all.disable_ipv6=1" ]
+        securityContext:
+          privileged: true
       - name: init-mysql
         image: "{{ .Values.busybox.image }}:{{ .Values.busybox.tag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
