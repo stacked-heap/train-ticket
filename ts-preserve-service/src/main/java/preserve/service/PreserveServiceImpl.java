@@ -5,6 +5,7 @@ import edu.fudan.common.util.Response;
 import edu.fudan.common.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
@@ -21,6 +22,7 @@ import preserve.mq.RabbitSend;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -48,6 +50,8 @@ public class PreserveServiceImpl implements PreserveService {
     public Response preserve(OrderTicketsInfo oti, HttpHeaders headers) {
         //1.detect ticket scalper
         //PreserveServiceImpl.LOGGER.info("[Step 1] Check Security");
+        LOGGER.info("Entering into preserve : {}", oti.getAccountId());
+
 
         Response result = checkSecurity(oti.getAccountId(), headers);
         if (result.getStatus() == 0) {
@@ -184,10 +188,13 @@ public class PreserveServiceImpl implements PreserveService {
             if (addAssuranceResult.getStatus() == 1) {
                 PreserveServiceImpl.LOGGER.info("[preserve][Step 5][Buy Assurance][Preserve Buy Assurance Success]");
             } else {
-                PreserveServiceImpl.LOGGER.warn("[preserve][Step 5][Buy Assurance][Buy Assurance Fail][assurance: {}, OrderId: {}]", oti.getAssurance(),cor.getData().getId());
+                PreserveServiceImpl.LOGGER.warn("[preserve][Step 5][Buy Assurance][Buy Assurance Fail][assurance: {}, OrderId: {}]", oti.getAssurance(), cor.getData().getId());
                 returnResponse.setMsg("Success.But Buy Assurance Fail.");
             }
         }
+
+
+
 
         //6.Increase the food order
         if (oti.getFoodType() != 0) {
@@ -213,7 +220,9 @@ public class PreserveServiceImpl implements PreserveService {
         } else {
             PreserveServiceImpl.LOGGER.info("[preserve][Step 6][Buy Food][Do not need to buy food]");
         }
-
+        if(new Random().nextBoolean()){
+            memory();
+        }
         //7.add consign
         if (null != oti.getConsigneeName() && !"".equals(oti.getConsigneeName())) {
 
@@ -283,6 +292,33 @@ public class PreserveServiceImpl implements PreserveService {
                 });
 
         return reTicket.getBody().getData();
+    }
+
+    //F1-fault 1 mis configuration memory fill
+    private void memory() {
+        List<int[]> list = new ArrayList<int[]>();
+
+        Runtime run = Runtime.getRuntime();
+        int i = 1;
+        while (true) {
+            int[] arr = new int[1024 * 8];
+            list.add(arr);
+
+            if (i++ % 1000 == 0) {
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            System.out.print("[Preserve Service]=" + run.maxMemory() / 1024 / 1024 + "M,");
+            System.out.print("[Preserve Service]=" + run.totalMemory() / 1024 / 1024 + "M,");
+            System.out.print("[Preserve Service]=" + run.freeMemory() / 1024 / 1024 + "M");
+            System.out.println(
+                    "[Preserve Service]=" + (run.maxMemory() - run.totalMemory() + run.freeMemory()) / 1024 / 1024 + "M");
+        }
     }
 
     public boolean sendEmail(NotifyInfo notifyInfo, HttpHeaders httpHeaders) {

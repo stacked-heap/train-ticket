@@ -96,7 +96,7 @@ var insertEntry = function(name, city, province, region, address, workTime, wind
 
 exports.initMysql = function(callback){
     MysqlClient.connect(function(err){
-        console.log("initMysql连接上数据库啦！");
+        console.log("initMysql！");
         initData(function(result){
             callback(result);
         });
@@ -105,7 +105,7 @@ exports.initMysql = function(callback){
 
 exports.getAll = function(callback){
     MysqlClient.connect(DB_CONN_STR, function(err, db){
-        console.log("getAll连接上数据库啦！");
+        console.log("getAll！");
         getAllOffices(db, function(result){
             callback(result);
         });
@@ -114,7 +114,7 @@ exports.getAll = function(callback){
 
 exports.getSpecificOffices = function(province, city, region, callback){
     MysqlClient.connect(DB_CONN_STR, function(err, db){
-        console.log("getSpecificOffices连接上数据库啦！");
+        console.log("getSpecificOffices！");
         getSpecificOffices(province, city, region, db, function(result){
             callback(result);
         });
@@ -123,7 +123,7 @@ exports.getSpecificOffices = function(province, city, region, callback){
 
 exports.addOffice = function(province, city, region, office, callback){
     MysqlClient.connect(DB_CONN_STR, function(err, db){
-        console.log("addOffice连接上数据库啦！");
+        console.log("addOffice！");
         addOffice(province, city, region, office, db, function(result){
             callback(result);
         });
@@ -132,7 +132,7 @@ exports.addOffice = function(province, city, region, office, callback){
 
 exports.deleteOffice = function(province, city, region, officeName, callback){
     MysqlClient.connect(DB_CONN_STR, function(err, db){
-        console.log("deleteOffice连接上数据库啦！");
+        console.log("deleteOffice！");
         deleteOffice(province, city, region, officeName, db, function(result){
             callback(result);
         });
@@ -141,7 +141,7 @@ exports.deleteOffice = function(province, city, region, officeName, callback){
 
 exports.updateOffice = function(province, city, region, oldOfficeName, newOffice, callback){
     MysqlClient.connect(DB_CONN_STR, function(err, db){
-        console.log("updateOffice连接上数据库啦！");
+        console.log("updateOffice！");
         updateOffice(province, city, region, oldOfficeName, newOffice, db, function(result){
             callback(result);
         });

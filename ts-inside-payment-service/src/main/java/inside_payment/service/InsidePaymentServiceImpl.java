@@ -97,7 +97,7 @@ public class InsidePaymentServiceImpl implements InsidePaymentService {
             }
 
             if (totalExpand.compareTo(money) > 0) {
-                //站外支付
+
                 Payment outsidePaymentInfo = new Payment();
                 outsidePaymentInfo.setOrderId(info.getOrderId());
                 outsidePaymentInfo.setUserId(userId);
