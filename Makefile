@@ -1,6 +1,6 @@
 # Codewisdom Train-Ticket system
 
-Repo=codewisdom
+Repo=kvelusamycs
 Tag=1.0.1
 Namespace="default"
 DeployArgs=""
@@ -34,6 +34,10 @@ deploy: build deploy-no-build
 # DeployArgs "--with-tracing"      : deploy train-ticket with skywalking
 # DeployArgs "--all"               : deploy train-ticket with mysql cluster each service
 .PHONY: deploy-no-build
+deploy-no-build:
+	@hack/deploy/deploy.sh $(Namespace) "$(DeployArgs)"
+
+.PHONY: deploy-db
 deploy-no-build:
 	@hack/deploy/deploy.sh $(Namespace) "$(DeployArgs)"
 
