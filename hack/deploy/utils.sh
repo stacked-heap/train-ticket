@@ -110,6 +110,7 @@ function deploy_tt_dp {
 function deploy_tt_dp_sw {
   namespace=$1
   echo "Start to deploy train-ticket deployments with skywalking agent."
+  kubectl apply -f deployment/kubernetes-manifests/quickstart-k8s/yamls/sw_configmap.yml -n $namespace > /dev/null
   update_tt_sw_dp_cm $nacosRelease $rabbitmqRelease
   kubectl apply -f deployment/kubernetes-manifests/quickstart-k8s/yamls/sw_deploy.yaml -n $namespace > /dev/null
   echo "End deployment Step <3/3>----------------------------------------------------------------------"

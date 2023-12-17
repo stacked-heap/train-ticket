@@ -26,47 +26,50 @@ function quick_start {
 
 function deploy_all {
   deploy_infrastructures  $namespace
-  deploy_tt_mysql_each_service  $namespace
+  deploy_tt_mysql_all_in_one  $namespace
   deploy_tt_secret  $namespace
   deploy_tt_svc $namespace
   deploy_tt_dp_sw  $namespace
   deploy_tracing  $namespace
-  deploy_monitoring
+  # deploy_monitoring
 }
 
 
 function deploy {
-    if [ $argNone == 1 ]; then
-      quick_start
-      exit $?
-    fi
-
-    if [ $argAll == 1 ]; then
       deploy_all
       exit $?
-    fi
 
-    deploy_infrastructures $namespace
+    # if [ $argNone == 1 ]; then
+    #   quick_start
+    #   exit $?
+    # fi
 
-    if [ $argDB == 1 ]; then
-      deploy_tt_mysql_each_service  $namespace
-    else
-      deploy_tt_mysql_all_in_one $namespace
-    fi
+    # if [ $argAll == 1 ]; then
+    #   deploy_all
+    #   exit $?
+    # fi
 
-    deploy_tt_secret  $namespace
-    deploy_tt_svc $namespace
+    # deploy_infrastructures $namespace
 
-    if [ $argTracing == 1 ]; then
-      deploy_tt_dp_sw  $namespace
-      deploy_tracing  $namespace
-    else
-      deploy_tt_dp $namespace
-    fi
+    # if [ $argDB == 1 ]; then
+    #   deploy_tt_mysql_each_service  $namespace
+    # else
+    #   deploy_tt_mysql_all_in_one $namespace
+    # fi
 
-    if [ $argMonitoring == 1 ]; then
-      deploy_monitoring
-    fi
+    # deploy_tt_secret  $namespace
+    # deploy_tt_svc $namespace
+
+    # if [ $argTracing == 1 ]; then
+    #   deploy_tt_dp_sw  $namespace
+    #   deploy_tracing  $namespace
+    # else
+    #   deploy_tt_dp $namespace
+    # fi
+
+    # if [ $argMonitoring == 1 ]; then
+    #   deploy_monitoring
+    # fi
 }
 
 #deploy
