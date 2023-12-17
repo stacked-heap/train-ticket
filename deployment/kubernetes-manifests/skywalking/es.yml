@@ -29,6 +29,13 @@ metadata:
   name: elasticsearch
 spec:
   replicas: 1
+  nodeSelector:
+    elasticsearch-node: "true"
+  tolerations:
+  - key: "elasticsearch"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
   selector:
     matchLabels:
       run: elasticsearch
@@ -52,11 +59,17 @@ spec:
         - containerPort: 9300
           name: tramsport
           protocol: TCP
+        volumeMounts:
+        - name: elasticsearch
+          mountPath: /data
         resources:
           limits:
-            cpu: 500m
-            memory: 2Gi
+            cpu: 2000m
+            memory: 12Gi
           requests:
-            cpu: 500m
-            memory: 2Gi
+            cpu: 1000m
+            memory: 8Gi
+      volumes:
+      - name: elasticsearch
+        emptyDir: {}
 status: {}
