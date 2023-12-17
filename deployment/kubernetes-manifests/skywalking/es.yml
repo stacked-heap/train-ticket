@@ -29,13 +29,6 @@ metadata:
   name: elasticsearch
 spec:
   replicas: 1
-  nodeSelector:
-    elasticsearch-node: "true"
-  tolerations:
-  - key: "elasticsearch"
-    operator: "Equal"
-    value: "true"
-    effect: "NoSchedule"
   selector:
     matchLabels:
       run: elasticsearch
@@ -46,6 +39,13 @@ spec:
       labels:
         run: elasticsearch
     spec:
+      nodeSelector:
+        elasticsearch-node: "true"
+      tolerations:
+        - key: "elasticsearch"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
       containers:
       - env:
         - name: discovery.type
